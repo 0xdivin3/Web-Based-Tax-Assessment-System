@@ -6,7 +6,7 @@ import { Card, Badge } from "@/components/ui";
 import { formatNaira } from "@/lib/tax-calculator";
 import { formatDate, statusColor } from "@/lib/utils";
 import Link from "next/link";
-import { FileText, CreditCard, Award, Bell } from "lucide-react";
+import { FileText, CreditCard, Award, Bell, Receipt } from "lucide-react";
 
 export default async function TaxpayerDashboard() {
   const session = await getServerSession(authOptions);
@@ -58,10 +58,11 @@ export default async function TaxpayerDashboard() {
       </div>
 
       {/* Quick actions */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
           { href: "/file-return",  icon: FileText,  label: "File New Return",  color: "green" },
           { href: "/payment",      icon: CreditCard, label: "Make Payment",     color: "blue" },
+          { href: "/invoices",     icon: Receipt,    label: "E-Invoices",       color: "orange" },
           { href: "/certificate",  icon: Award,      label: "View Certificates",color: "purple" },
         ].map(({ href, icon: Icon, label, color }) => (
           <Link

@@ -46,11 +46,8 @@ export async function GET(
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Inter, sans-serif; background: #fff; color: #111; padding: 60px; }
-    .header { display: flex; align-items: center; gap: 20px; border-bottom: 4px solid #008751; padding-bottom: 20px; margin-bottom: 30px; }
-    .flag { display: flex; gap: 4px; }
-    .flag-stripe { width: 18px; height: 40px; border-radius: 2px; }
-    .green { background: #008751; }
-    .white { background: #fff; border: 1px solid #ddd; }
+    .header { display: flex; align-items: center; gap: 16px; border-bottom: 4px solid #008751; padding-bottom: 20px; margin-bottom: 30px; }
+    .logo-mark { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: #008751; border-radius: 10px; color: #fff; font-weight: 700; font-size: 20px; flex-shrink: 0; }
     h1 { font-size: 22px; font-weight: 700; color: #008751; }
     h2 { font-size: 13px; color: #555; margin-top: 2px; }
     .title { text-align: center; margin: 20px 0 30px; }
@@ -72,17 +69,13 @@ export async function GET(
   </style>
 </head>
 <body>
-  <div class="watermark">FIRS</div>
+  <div class="watermark">TAXIGN</div>
 
   <div class="header">
-    <div class="flag">
-      <div class="flag-stripe green"></div>
-      <div class="flag-stripe white"></div>
-      <div class="flag-stripe green"></div>
-    </div>
+    <div class="logo-mark">T</div>
     <div>
-      <h1>Federal Inland Revenue Service</h1>
-      <h2>Federal Republic of Nigeria — Web-based Tax Assessment System</h2>
+      <h1>Taxign</h1>
+      <h2>Web-based Tax Assessment System</h2>
     </div>
   </div>
 
@@ -93,8 +86,7 @@ export async function GET(
 
   <p class="body-text">
     This is to certify that the taxpayer named below has fulfilled their tax obligations
-    for the year stated below in accordance with the provisions of the Personal Income Tax
-    Act (PITA) Cap P8 LFN 2004 (as amended) and has been granted a Tax Clearance Certificate.
+    for the year stated below, as assessed and recorded on the Taxign platform.
   </p>
 
   <div class="details">
@@ -138,7 +130,7 @@ export async function GET(
 
   <div class="validity">
     ✓ This certificate is valid until <strong>${new Date(cert.validUntil).toLocaleDateString("en-NG", { day: "2-digit", month: "long", year: "numeric" })}</strong>.
-    For verification, contact FIRS via info@firs.gov.ng or call 09012345678.
+    For verification, contact Taxign support via support@taxign.app.
   </div>
 
   <div class="footer">
@@ -146,7 +138,7 @@ export async function GET(
     <div class="signature">
       <div class="sig-line"></div>
       <div class="sig-label">Authorised Signatory</div>
-      <div class="sig-label" style="margin-top:2px; font-weight:600;">Federal Inland Revenue Service</div>
+      <div class="sig-label" style="margin-top:2px; font-weight:600;">Taxign</div>
     </div>
   </div>
 

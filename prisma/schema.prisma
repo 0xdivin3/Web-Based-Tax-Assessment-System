@@ -40,6 +40,13 @@ enum PaymentStatus {
   REFUNDED
 }
 
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  PAID
+  VOID
+}
+
 model User {
   id            String    @id @default(cuid())
   tin           String?   @unique       // Tax Identification Number
@@ -60,6 +67,7 @@ model User {
   taxReturns    TaxReturn[]
   payments      Payment[]
   notifications Notification[]
+  invoices      Invoice[]
   auditLogs     AuditLog[]    @relation("AuditUser")
   reviewedBy    AuditLog[]    @relation("AuditAdmin")
 
@@ -113,9 +121,10 @@ model Payment {
   userId        String
   taxReturnId   String        @unique
   amount        Float
-  reference     String        @unique  // Remita/Paystack ref
+  reference     String        @unique  // Remita/Paystack ref or bank teller no.
   status        PaymentStatus @default(PENDING)
-  channel       String?       // "remita" | "paystack" | "bank"
+  channel       String?       // "remita" | "paystack" | "bank_transfer"
+  bankName      String?       // filled in for bank_transfer submissions
   paidAt        DateTime?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
@@ -167,4 +176,48 @@ model AuditLog {
   admin     User?    @relation("AuditAdmin", fields: [adminId], references: [id])
 
   @@map("audit_logs")
+}
+
+// E-Invoicing module
+// A taxpayer (typically VAT-registered) issues invoices for individual
+// transactions/sales. Each invoice computes VAT at a flat rate on its
+// line items. This is independent of the annual TaxReturn/Certificate flow.
+model Invoice {
+  id            String        @id @default(cuid())
+  userId        String                          // issuing taxpayer
+  invoiceNo     String        @unique
+  customerName  String
+  customerEmail String?
+  customerTin   String?
+
+  subtotal      Float         @default(0)
+  vatRate       Float         @default(0.075)   // 7.5% Nigeria VAT
+  vatAmount     Float         @default(0)
+  total         Float         @default(0)
+
+  status        InvoiceStatus @default(DRAFT)
+  issueDate     DateTime      @default(now())
+  dueDate       DateTime?
+  notes         String?
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  user          User          @relation(fields: [userId], references: [id])
+  items         InvoiceItem[]
+
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Float   @default(1)
+  unitPrice   Float   @default(0)
+  lineTotal   Float   @default(0)
+
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_items")
 }

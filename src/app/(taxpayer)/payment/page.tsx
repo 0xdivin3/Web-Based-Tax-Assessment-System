@@ -96,7 +96,7 @@ export default async function PaymentPage() {
             <p className="text-sm font-medium text-blue-900">Payment Channels</p>
             <ul className="mt-2 space-y-1 text-xs text-blue-700">
               <li>• Remita (recommended) — get a Remita Retrieval Reference (RRR)</li>
-              <li>• Bank transfer to designated FIRS accounts</li>
+              <li>• Bank transfer to designated Taxign accounts</li>
               <li>• Online payment via Paystack</li>
             </ul>
           </div>

@@ -9,13 +9,11 @@ export default function LandingPage() {
       <header className="bg-green-800 text-white">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-8 flex gap-0.5">
-              <div className="flex-1 bg-green-600 rounded-sm"/>
-              <div className="flex-1 bg-white rounded-sm"/>
-              <div className="flex-1 bg-green-600 rounded-sm"/>
+            <div className="flex items-center justify-center w-9 h-9 bg-white/15 rounded-lg">
+              <span className="font-bold text-lg">T</span>
             </div>
             <div>
-              <p className="font-bold text-sm leading-tight">Federal Inland Revenue Service</p>
+              <p className="font-bold text-sm leading-tight">Taxign</p>
               <p className="text-xs text-green-200">Web-based Tax Assessment System</p>
             </div>
           </div>
@@ -33,7 +31,7 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold mb-4">File Your Taxes Online</h1>
           <p className="text-green-100 text-lg mb-8 max-w-2xl mx-auto">
-            Assess, file, and pay your taxes securely from anywhere in Nigeria.
+            Assess, file, and pay your taxes securely from anywhere.
             Fast, transparent, and paperless.
           </p>
           <div className="flex gap-4 justify-center">
@@ -69,7 +67,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="bg-gray-900 text-gray-400 text-center py-8 text-sm">
-        <p>© 2024 Federal Inland Revenue Service of Nigeria. All rights reserved.</p>
+        <p>© 2026 Taxign. All rights reserved.</p>
       </footer>
     </div>
   );

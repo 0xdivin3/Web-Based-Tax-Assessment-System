@@ -106,5 +106,44 @@ export function generateTIN(): string {
 
 export function generateCertificateNo(year: number): string {
   const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
-  return `FIRS-${year}-${rand}`;
+  return `TXG-${year}-${rand}`;
+}
+
+// --- E-Invoicing helpers ---
+
+export const VAT_RATE = 0.075; // Nigeria standard VAT rate, 7.5%
+
+export interface InvoiceLineInput {
+  description: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+export interface InvoiceComputation {
+  items: { description: string; quantity: number; unitPrice: number; lineTotal: number }[];
+  subtotal: number;
+  vatRate: number;
+  vatAmount: number;
+  total: number;
+}
+
+export function computeInvoice(
+  lines: InvoiceLineInput[],
+  vatRate: number = VAT_RATE
+): InvoiceComputation {
+  const items = lines.map((l) => ({
+    ...l,
+    lineTotal: l.quantity * l.unitPrice,
+  }));
+  const subtotal = items.reduce((s, i) => s + i.lineTotal, 0);
+  const vatAmount = subtotal * vatRate;
+  const total = subtotal + vatAmount;
+
+  return { items, subtotal, vatRate, vatAmount, total };
+}
+
+export function generateInvoiceNo(): string {
+  const year = new Date().getFullYear();
+  const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `INV-${year}-${rand}`;
 }

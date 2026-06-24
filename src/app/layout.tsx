@@ -2,19 +2,20 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FIRS Tax Assessment Portal",
-  description: "Federal Inland Revenue Service — Web-based Tax Assessment System",
+  title: "Taxign — Tax Assessment Portal",
+  description: "Taxign — Web-based Tax Assessment System",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
