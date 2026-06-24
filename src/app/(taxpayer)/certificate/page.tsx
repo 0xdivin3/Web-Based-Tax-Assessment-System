@@ -9,7 +9,7 @@ import { Award, Download } from "lucide-react";
 
 export default async function CertificatePage() {
   const session = await getServerSession(authOptions);
-  const userId = session!.user!.id;
+  const userId = session!.user.id;
 
   const returns = await prisma.taxReturn.findMany({
     where: { userId, certificate: { isNot: null } },
