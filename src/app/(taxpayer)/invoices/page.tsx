@@ -17,7 +17,7 @@ const invoiceStatusColor: Record<string, string> = {
 
 export default async function InvoicesPage() {
   const session = await getServerSession(authOptions);
-  const userId = session!.user.id;
+  const userId = session!.user!.id;
 
   const invoices = await prisma.invoice.findMany({
     where: { userId },
