@@ -10,7 +10,7 @@ import { FileText, CreditCard, Award, Bell, Receipt } from "lucide-react";
 
 export default async function TaxpayerDashboard() {
   const session = await getServerSession(authOptions);
-  const userId = session!.user.id;
+  const userId = session!.user!.id;
 
   const [returns, notifications, user] = await Promise.all([
     prisma.taxReturn.findMany({
