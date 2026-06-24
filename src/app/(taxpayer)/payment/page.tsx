@@ -10,7 +10,7 @@ import { CreditCard, CheckCircle } from "lucide-react";
 
 export default async function PaymentPage() {
   const session = await getServerSession(authOptions);
-  const userId = session!.user!.id;
+  const userId = session!.user.id;
 
   const returns = await prisma.taxReturn.findMany({
     where: { userId, status: "APPROVED" },
